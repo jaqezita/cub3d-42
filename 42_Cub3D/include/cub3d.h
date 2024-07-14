@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:13:22 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/13 20:41:46 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 19:07:23 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,9 @@ void			find_player_position(t_game *d);
 
 // ---execution---
 //execution.c
+int				execute_game(t_game *game);
+void			render_frame(void *mlx_game);
+void			exit_game(t_mlx *mlx);
 
 //raycasting
 void			calc_ray_intersections(t_mlx *mlx);

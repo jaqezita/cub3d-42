@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 18:31:41 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/11 18:33:58 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 20:11:24 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,27 @@
 
 char	*get_map(t_game *maps)
 {
-	maps->map = ft_strdup("");
-	while (maps->line[0])
+	char *line;
+	
+	maps->map = "";
+	line = "";
+	while (maps->line)
 	{
-		if (maps->line[0] == '\n')
+		if (maps->line && maps->line[0] == '\n')
 		{
 			ft_putstr_fd("Error\nMap is not valid", 1);
 			return (free_and_close(maps->map, maps->line, -1), NULL);
 		}
-		maps->map = ft_strjoin(maps->map, maps->line);
-		free(maps->line);
+		line = ft_strdup(maps->map);
+		maps->map = ft_strjoin(line, maps->line);
+		if (maps->line)
+			free(maps->line);
+		if (line)
+			free(line);
 		maps->line = get_next_line(maps->fd);
 	}
+	if (maps->line)
+		free(maps->line);
 	return (maps->map);
 }
 
@@ -37,7 +46,7 @@ int	read_map(char *argv, t_game *maps, int *count)
 	maps->line = get_next_line(maps->fd);
 	if (!maps->line)
 		return (ft_putstr_fd("Error\nFile is empty", 1), 0);
-	maps->texture = ft_strdup("");
+	maps->texture = "";
 	while (maps->line && maps->line[0] != '1' && maps->line[0] != 32)
 	{
 		if (is_valid_color_texture(maps->line))

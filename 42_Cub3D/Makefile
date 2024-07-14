@@ -6,7 +6,7 @@
 #    By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/10 18:21:52 by jaqribei          #+#    #+#              #
-#    Updated: 2024/07/10 18:21:53 by jaqribei         ###   ########.fr        #
+#    Updated: 2024/07/14 18:53:36 by jaqribei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,8 +45,14 @@ src += $(addprefix parser/, cleanup.c \
 							texture_utils.c \
 							validate_input.c)
 
-src += $(addprefix execution/, execution.c)
-
+src += $(addprefix execution/, execution.c \
+							player.c \
+							player_key_manager.c \
+							raycasting.c \
+							raycasting_utils.c \
+							rendering.c \
+							rendering_utils.c \
+							texture_management.c)
 
 #******************************************************************************#
 #									OBJECTS									   #
@@ -87,10 +93,10 @@ norm:
 	@norminette $(SRC) $(HEADER) ./libs/libft
 
 gdb: re
-	@gdb --tui --args ./$(NAME) scenes/example.rt
+	@gdb --tui --args ./$(NAME) assets/maps/baboon_maze.cub
 
 valgrind: re
-	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.sup ./$(NAME) scenes/example.rt
+	@valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.sup ./$(NAME) assets/maps/baboon_maze.cub
 
 run: all
 	@./$(NAME) scenes/example.rt

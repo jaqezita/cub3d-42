@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 14:55:24 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/11 18:33:58 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 19:08:20 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	load_texture_list(t_game *d, t_texture_node **list)
 	i = 0;
 	while (d->texture2d[i])
 	{
-		node = new_node(d->texture2d[i]);
+		node = new_node(d->texture2d[i++]);
 		if (!node)
 			return (0);
 		append_texture_to_list(list, node);
@@ -75,9 +75,9 @@ void	append_texture_to_list(t_texture_node **list, t_texture_node *node)
 	t_texture_node	*temp;
 
 	temp = *list;
-	if (!*list)
+	if (*list == NULL)
 	{
-		*list = node;
+		(*list) = node;
 		return ;
 	}
 	while (temp->next)

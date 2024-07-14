@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 20:57:32 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/11 18:33:58 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 19:14:45 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	parsing(int argc, char **argv, t_game *data, t_texture_node *list)
 	list = NULL;
 	check_args(argc, argv);
 	count = 0;
+	data->rows = 0;
+	data->cols = 0;
 	if (!read_map(argv[1], data, &count))
 		return (0);
 	if (!prepare_and_validate_map(data))

@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 20:39:36 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/13 20:40:09 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:40:42 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	put_pixel_bounds(t_mlx *mlx, int x, int y, int color)
 		return ;
 	else if (y >= SCREEN_HEIGHT)
 		return ;
-	mlx_pixel_put(mlx->img, x, y, color);
+	mlx_put_pixel(mlx->img, x, y, color);
 }
 
 int	reverse_bytes(int c)

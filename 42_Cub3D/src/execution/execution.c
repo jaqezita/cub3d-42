@@ -6,13 +6,11 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:29:44 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/13 20:40:02 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 18:37:21 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// initialize_and_execute_game;
 
 int	execute_game(t_game *game)
 {
