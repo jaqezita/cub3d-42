@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:29:44 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/15 00:19:32 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:39:22 by andrefil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,3 @@ void	exit_game(t_mlx *mlx)
 	ft_putstr_fd("Exit Game\n", 1);
 	exit(0);
 }
-
-
-
