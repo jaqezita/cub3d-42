@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 17:13:22 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/14 23:12:41 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:48:13 by andrefil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,12 +213,9 @@ void			move_player(t_mlx *mlx, double move_x, double move_y);
 void			key_press(mlx_key_data_t keydata, void *mlx_game);
 void			reset_keys(mlx_key_data_t keydata, t_mlx *mlx);
 
-
 //texture_management.c
 int				load_textures(t_texture *texture, t_texture_node *list);
 int				validate_texture_loading(t_texture_node *list);
 void			delete_tex(t_texture *texture);
 
-
-//player movement
 #endif
