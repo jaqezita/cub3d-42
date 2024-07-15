@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 17:29:44 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/14 18:37:21 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:19:32 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	execute_game(t_game *game)
 	mlx_key_hook(mlx.mlx, &key_press, &mlx);
 	mlx_loop_hook(mlx.mlx, &render_frame, &mlx);
 	mlx_loop(mlx.mlx);
+	free(game->map);
 	exit_game(&mlx);
 	return (0);
 }
@@ -58,6 +59,7 @@ void	exit_game(t_mlx *mlx)
 	free(mlx->player);
 	free(mlx->ray);
 	mlx_terminate(mlx->mlx);
+	mlx = 0;
 	ft_putstr_fd("Exit Game\n", 1);
 	exit(0);
 }

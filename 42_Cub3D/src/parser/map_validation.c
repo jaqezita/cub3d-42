@@ -6,7 +6,7 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 21:08:16 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/13 02:14:47 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/14 23:40:41 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	validate_map(t_game *maps, int count)
 		|| !validate_map_boundaries(maps->map_grid)
 		|| !validate_map_lines(maps->map_grid))
 	{
-		free(maps->map_grid);
+		free_array(maps->map_grid);
 		return (0);
 	}
 	return (1);

@@ -6,66 +6,65 @@
 /*   By: jaqribei <jaqribei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 18:31:41 by jaqribei          #+#    #+#             */
-/*   Updated: 2024/07/14 20:11:24 by jaqribei         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:21:36 by jaqribei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*get_map(t_game *maps)
+char *get_map(t_game *maps)
 {
-	char *line;
-	
-	maps->map = "";
-	line = "";
-	while (maps->line)
-	{
-		if (maps->line && maps->line[0] == '\n')
-		{
-			ft_putstr_fd("Error\nMap is not valid", 1);
-			return (free_and_close(maps->map, maps->line, -1), NULL);
-		}
-		line = ft_strdup(maps->map);
-		maps->map = ft_strjoin(line, maps->line);
-		if (maps->line)
-			free(maps->line);
-		if (line)
-			free(line);
-		maps->line = get_next_line(maps->fd);
-	}
-	if (maps->line)
-		free(maps->line);
-	return (maps->map);
+    char *temp;
+    maps->map = ft_strdup(""); // Use ft_strdup to initialize an empty string
+    while (maps->line)
+    {
+        if (maps->line[0] == '\n')
+        {
+            ft_putstr_fd("Error\nMap is not valid", 1);
+            return (free_and_close(maps->map, maps->line, -1), NULL);
+        }
+        temp = maps->map;
+        maps->map = ft_strjoin(maps->map, maps->line);
+        free(temp); // Free the previous map string
+        free(maps->line);
+        maps->line = get_next_line(maps->fd);
+    }
+    return (maps->map);
 }
 
-int	read_map(char *argv, t_game *maps, int *count)
+int read_map(char *argv, t_game *maps, int *count)
 {
-	maps->fd = open(argv, O_RDONLY);
-	if (maps->fd == -1)
-		return (ft_putstr_fd("Error\nFile not found", 1), 0);
-	maps->line = get_next_line(maps->fd);
-	if (!maps->line)
-		return (ft_putstr_fd("Error\nFile is empty", 1), 0);
-	maps->texture = "";
-	while (maps->line && maps->line[0] != '1' && maps->line[0] != 32)
-	{
-		if (is_valid_color_texture(maps->line))
-		{
-			maps->texture = ft_strjoin(maps->texture, maps->line);
-			(*count)++;
-		}
-		free(maps->line);
-		maps->line = get_next_line(maps->fd);
-	}
-	if (!is_texture_color_count_valid(maps, *count))
-		return (free_and_close(NULL, NULL, maps->fd), 0);
-	maps->texture2d = ft_split(maps->texture, '\n');
-	if (!maps->texture2d)
-		return (free_and_close(maps->texture, NULL, maps->fd), 0);
-	if (!validate_map(maps, *count))
-		return (free_and_close(maps->texture, NULL, maps->fd), \
-		free_array(maps->texture2d), 0);
-	return (free_and_close(maps->texture, maps->line, maps->fd), 1);
+    char *temp;
+    maps->fd = open(argv, O_RDONLY);
+    if (maps->fd == -1)
+        return (ft_putstr_fd("Error\nFile not found", 1), 0);
+    maps->line = get_next_line(maps->fd);
+    if (!maps->line)
+        return (ft_putstr_fd("Error\nFile is empty", 1), 0);
+    maps->texture = ft_strdup(""); // Use ft_strdup to initialize an empty string
+    while (maps->line && maps->line[0] != '1' && maps->line[0] != 32)
+    {
+        if (is_valid_color_texture(maps->line))
+        {
+            temp = maps->texture;
+            maps->texture = ft_strjoin(maps->texture, maps->line);
+            free(temp); // Free the previous texture string
+            (*count)++;
+        }
+        free(maps->line);
+        maps->line = get_next_line(maps->fd);
+    }
+    if (!is_texture_color_count_valid(maps, *count))
+        return (free_and_close(maps->map, NULL, maps->fd), 0);
+    maps->texture2d = ft_split(maps->texture, '\n');
+    if (!maps->texture2d)
+        return (free_and_close(maps->texture, NULL, maps->fd), 0);
+    if (!validate_map(maps, *count))
+    {
+        return (free_and_close(maps->texture, NULL, maps->fd), \
+        free_array(maps->texture2d), 0);
+    }
+    return (free_and_close(maps->texture, maps->line, maps->fd), 1);
 }
 
 int	prepare_and_validate_map(t_game *d)
